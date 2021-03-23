@@ -6,7 +6,7 @@ sf::CircleShape p;
 Player::Player() {
 	p.setRadius(20);
 	p.setOrigin(p.getRadius() * 0.5, p.getRadius() * 2);
-	p.setPosition(Global::ScreenX / 2, Global::ScreenY);
+	p.setPosition(Global::ScreenX / 2, Global::ScreenY/2);
 }
 
 
@@ -28,4 +28,9 @@ void Player::moveRight(float deltaTime) {
 void Player::moveLeft(float deltaTime)
 {
 	p.move(-Global::playerSpeed * deltaTime, 0.0f);
+}
+
+sf::Vector2f Player::GetPlayerPosition() 
+{
+	return p.getPosition(); 
 }

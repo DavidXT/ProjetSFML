@@ -8,7 +8,7 @@ Ball::Ball()
 {
 	b.setRadius(10);
 	b.setOrigin(b.getRadius() * 0.5, b.getRadius() * 2);
-	b.setPosition(Global::ScreenX / 2, Global::ScreenY);
+	//b.setPosition(Global::ScreenX / 2, Global::ScreenY/2);
 }
 
 sf::CircleShape Ball::getBall()
@@ -16,9 +16,9 @@ sf::CircleShape Ball::getBall()
 	return b;
 }
 
-void Ball::setBallPosition(sf::CircleShape cs)
+void Ball::setBallPosition(sf::Vector2f cs)
 {
-	b.setPosition(cs.getPosition());
+	b.setPosition(cs);
 }
 
 void Ball::moveBall(float deltaTime,sf::Vector2f target) {
