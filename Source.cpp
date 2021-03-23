@@ -1,6 +1,7 @@
 #include "Global.h"
 #include "Ball.h"
 #include "Player.h"
+#include "MathFunctions.h"
 
 void main() {
 	Player* p = new Player();
@@ -8,11 +9,13 @@ void main() {
 	sf::Clock clock; 
 	sf::RenderWindow window(sf::VideoMode(Global::ScreenX, Global::ScreenY), "MyWindow");
 	sf::Vector2f direction;
+	sf::Vector2i oMousePosition;
 	sf::Event event;
-	float deltaTime = clock.restart().asSeconds();
 	while (window.isOpen()) {
+		float deltaTime = clock.restart().asSeconds();
+		window.clear(sf::Color::Black);
 		while (window.pollEvent(event)) {
-			window.clear(sf::Color::Black);
+			
 			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Up))
 			{
 				p->moveUp(deltaTime);
@@ -33,22 +36,22 @@ void main() {
 			if (event.type == sf::Event::MouseButtonPressed && Global::canShoot)
 			{
 				Global::canShoot = false;
-				b->setBallPosition(p->getPlayer());
+				b->setBallPosition(p->GetPlayerPosition());
+				oMousePosition = sf::Mouse::getPosition(window);
+				direction = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePosition);
+				direction = MathFunctions::Normalize(direction); 
 			}
 		}
 		if (!Global::canShoot) {
-			window.draw(b->getBall());
-			b->moveBall(deltaTime, direction);
-			if (b->getBall().getPosition().x < 0) {
-				Global::canShoot = true;
-				b->setBallPosition(p->getPlayer());
-			}
-			if (b->getBall().getPosition().y < 0) {
-				Global::canShoot = true;
-				b->setBallPosition(p->getPlayer());
-			}
+			
+			const sf::Vector2f& oPosition = b->getBall().getPosition(); 
+			float fX = oPosition.x + (direction.x * Global::bulletSpeed * deltaTime); 
+			float fY = oPosition.y + (direction.y * Global::bulletSpeed * deltaTime);
+			b->getBall().move(fX, fY); 
+			//b->getBall().setPosition(fX, fY); 
 		}
 		window.draw(p->getPlayer());
+		window.draw(b->getBall());
 		window.display();
 	}
 }
