@@ -5,5 +5,6 @@ class MathFunctions
 public : 
 	static sf::Vector2f Normalize(sf::Vector2f); 
 	static sf::Vector2f ResultVector(sf::Vector2f, sf::Vector2i); 
+	static sf::Vector2f VectorRebound(sf::Vector2f, double);
 };
 

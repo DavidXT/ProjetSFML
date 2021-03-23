@@ -1,12 +1,11 @@
 #include "Player.h"
 #include "Global.h"
 
-sf::CircleShape p;
-
 Player::Player() {
-	p.setRadius(20);
-	p.setOrigin(p.getRadius() * 0.5, p.getRadius() * 2);
-	p.setPosition(Global::ScreenX / 2, Global::ScreenY/2);
+	p.setSize(sf::Vector2f(50, 80)); 
+	p.setOrigin(p.getSize().x * 0.5, p.getSize().y * 0);
+	p.setPosition(Global::ScreenX / 2, Global::ScreenY - p.getSize().y);
+	BoxCollision = p.getGlobalBounds(); 
 }
 
 
@@ -14,7 +13,7 @@ void Player::moveDown(float deltaTime) {
 	p.move(0.0f, Global::playerSpeed * deltaTime);
 }
 
-sf::CircleShape Player::getPlayer() {
+sf::RectangleShape& Player::getPlayer() {
 	return p;
 }
 void Player::moveUp(float deltaTime) {

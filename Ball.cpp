@@ -2,16 +2,15 @@
 #include "Global.h"
 #include "Ball.h"
 
-sf::CircleShape b;
-
 Ball::Ball()
 {
 	b.setRadius(10);
 	b.setOrigin(b.getRadius() * 0.5, b.getRadius() * 2);
+	BoxCollision = b.getGlobalBounds(); 
 	//b.setPosition(Global::ScreenX / 2, Global::ScreenY/2);
 }
 
-sf::CircleShape Ball::getBall()
+sf::CircleShape& Ball::getBall()
 {
 	return b;
 }

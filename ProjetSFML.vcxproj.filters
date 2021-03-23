@@ -15,6 +15,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Global.cpp" />
+    <ClCompile Include="MathFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
@@ -24,6 +25,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="MathFunctions.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

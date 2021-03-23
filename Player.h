@@ -9,8 +9,10 @@ public:
 	void moveUp(float);
 	void moveDown(float);
 	sf::Vector2f GetPlayerPosition(); 
-	sf::CircleShape getPlayer();
+	sf::RectangleShape& getPlayer();
 private:
-	sf::CircleShape p;
+	sf::RectangleShape p;
+	sf::FloatRect BoxCollision; 
+	sf::Vector2f Size; 
 };
 
