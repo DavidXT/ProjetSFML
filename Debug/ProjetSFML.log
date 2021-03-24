@@ -1,3 +1,0 @@
-﻿  Source.cpp
-D:\Gaming Campus\C++\Source.cpp(3,13): warning C4326: le type de retour de 'main' doit être 'int' au lieu de 'void'
-  ProjetSFML.vcxproj -> D:\Gaming Campus\C++\ProjetSFML\Debug\ProjetSFML.exe

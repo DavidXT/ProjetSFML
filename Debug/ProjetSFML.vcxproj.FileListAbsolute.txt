@@ -1,2 +1,0 @@
-D:\Gaming Campus\C++\ProjetSFML\Debug\ProjetSFML.exe
-D:\Gaming Campus\C++\ProjetSFML\Debug\ProjetSFML.pdb
