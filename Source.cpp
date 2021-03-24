@@ -3,8 +3,10 @@
 #include "Player.h"
 #include "MathFunctions.h"
 #include <iostream>
+#include "gameManager.h"
 
 void main() {
+	gameManager* gm = new gameManager(Global::level);
 	Player* p = new Player();
 	Ball* b = new Ball();
 	sf::Clock clock; 
@@ -18,8 +20,6 @@ void main() {
 	while (window.isOpen()) {
 		float deltaTime = clock.restart().asSeconds();
 		window.clear(sf::Color::Black);
-
-
 		while (window.pollEvent(event)) {
 			
 			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Up))
@@ -53,7 +53,6 @@ void main() {
 			const sf::Vector2f& oPosition = b->getBall().getPosition(); 
 			float fX = oPosition.x + (direction.x * (float) Global::bulletSpeed * deltaTime); 
 			float fY = oPosition.y + (direction.y * (float) Global::bulletSpeed * deltaTime);
-			//b->getBall().move(fX, fY); 
 			b->getBall().setPosition(fX, fY);
 		}
 		if (b->getBall().getGlobalBounds().left < 0) 
@@ -73,7 +72,11 @@ void main() {
 			direction.y *= -1;
 		}
 		
-			
+		for (int i = 0; i < Global::level; i++) {
+			for (int j = 0; j < Global::nbBrick; j++) {
+				window.draw(gm->getBrick(i, j)->getBrick());
+			}
+		}
 		window.draw(p->getPlayer());
 		window.draw(b->getBall());
 		window.display();

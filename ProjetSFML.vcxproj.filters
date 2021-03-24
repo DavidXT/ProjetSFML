@@ -16,6 +16,8 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="MathFunctions.cpp" />
+    <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="gameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
@@ -28,6 +30,12 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="gameManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

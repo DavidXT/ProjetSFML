@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -27,6 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Brick.h" />
+    <ClInclude Include="gameManager.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="Player.h" />

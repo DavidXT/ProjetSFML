@@ -32,6 +32,6 @@
 *.app
 
 # Debug
-./Debug/
+Debug/
 *.dll
 .vs/
