@@ -13,6 +13,7 @@ public:
 private:
 	sf::RectangleShape p;
 	sf::FloatRect BoxCollision; 
-	sf::Vector2f Size; 
+	sf::Vector2f Size;
+	
 };
 

@@ -18,7 +18,6 @@
     <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="gameManager.cpp" />
-    <ClCompile Include="Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
@@ -37,9 +36,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="gameManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

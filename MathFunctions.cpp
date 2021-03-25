@@ -14,6 +14,6 @@ sf::Vector2f MathFunctions::ResultVector(sf::Vector2f A, sf::Vector2i B) {
 float MathFunctions::GetAngle(sf::Vector2f A, float globalangle, float pi) 
 {
 	float coeff = globalangle / pi; 
-	float angle = atan2(A.x, A.y) * coeff; 
+	float angle = atan2(A.x, A.y) * coeff * (-1); 
 	return angle; 
 }

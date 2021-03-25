@@ -2,10 +2,11 @@
 #include "Global.h"
 
 Player::Player() {
-	p.setSize(sf::Vector2f(80, 50)); 
+	p.setSize(sf::Vector2f(70, 120)); 
 	p.setOrigin(p.getSize().x * 0.5, p.getSize().y * 0.5);
-	p.setPosition(Global::ScreenX / 2, Global::ScreenY - p.getSize().y);
+	p.setPosition(Global::ScreenX / 2, Global::ScreenY);
 	BoxCollision = p.getGlobalBounds(); 
+	p.setFillColor(sf::Color(255, 106, 3, 255));
 }
 
 

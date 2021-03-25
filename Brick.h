@@ -3,7 +3,7 @@
 class Brick
 {
 public: 
-	Brick(int,int);
+	Brick(int,int, int);
 	sf::RectangleShape& getBrick();
 	bool& getDestroyed();
 	void getDamage();

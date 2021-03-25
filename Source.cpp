@@ -6,6 +6,7 @@
 #include "gameManager.h"
 
 void main() {
+	srand(time(NULL)); 
 	gameManager* gm = new gameManager(Global::level);
 	Player* p = new Player();
 	Ball* b = new Ball();
@@ -28,10 +29,12 @@ void main() {
 			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Left))
 			{
 				p->moveLeft(deltaTime);
+				b->setBallPosition(p->GetPlayerPosition());
 			}
 			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Right))
 			{
 				p->moveRight(deltaTime);
+				b->setBallPosition(p->GetPlayerPosition());
 			}
 			if (event.type == sf::Event::MouseButtonPressed && Global::canShoot)
 			{
@@ -67,8 +70,7 @@ void main() {
 			b->setBallPosition(p->GetPlayerPosition());
 			Global::canShoot = true;
 		}
-		oMousePositionForRotation.x = event.mouseMove.y; 
-		oMousePositionForRotation.y = event.mouseMove.x; 
+		oMousePositionForRotation = sf::Mouse::getPosition(window);
 		directionRotation = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePositionForRotation);
 		angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi); 
 		p->getPlayer().setRotation(angle);
@@ -107,8 +109,8 @@ void main() {
 				}
 			}
 		}
-		window.draw(p->getPlayer());
 		window.draw(b->getBall());
+		window.draw(p->getPlayer());
 		window.display();
 	}
 }

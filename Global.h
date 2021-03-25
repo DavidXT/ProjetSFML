@@ -2,7 +2,7 @@
 
 class Global {
 public:
-	static const int playerSpeed = 500;
+	static const int playerSpeed = 2000;
 	static const int bulletSpeed = 1000;
 	static const int ScreenX = 1500;
 	static const int ScreenY = 500;

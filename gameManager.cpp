@@ -18,7 +18,8 @@ gameManager::gameManager(int nbLine)
 	}
 	for (int i = 0; i < nbLine; i++) {
 		for (int j = 0; j < nbBrick; j++) {
-			AllBrick[i][j] = new Brick(10 + Global::sizeYBrick * i + 20 * i, 10 + Global::sizeXBrick * j + j * 20);
+			AllBrick[i][j] = new Brick(10 + Global::sizeYBrick * i + 20 * i, 10 + Global::sizeXBrick * j + j * 20, rand() % 3 + 1);
+			
 		}
 	}
 }
