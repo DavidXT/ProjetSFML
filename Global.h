@@ -11,7 +11,10 @@ public:
 	static const int ScreenXLimit = ScreenX - 125;
 	static const int sizeXBrick = ScreenXLimit / nbBrick;
 	static const int sizeYBrick = 50;
+	static const float Angle; 
+	static const float Pi; 
 	static bool canShoot;
+	
 
 
 };

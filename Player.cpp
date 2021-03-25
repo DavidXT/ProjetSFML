@@ -2,8 +2,8 @@
 #include "Global.h"
 
 Player::Player() {
-	p.setSize(sf::Vector2f(50, 80)); 
-	p.setOrigin(p.getSize().x * 0.5, p.getSize().y * 0);
+	p.setSize(sf::Vector2f(80, 50)); 
+	p.setOrigin(p.getSize().x * 0.5, p.getSize().y * 0.5);
 	p.setPosition(Global::ScreenX / 2, Global::ScreenY - p.getSize().y);
 	BoxCollision = p.getGlobalBounds(); 
 }

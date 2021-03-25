@@ -12,7 +12,10 @@ void main() {
 	sf::Clock clock; 
 	sf::RenderWindow window(sf::VideoMode(Global::ScreenX, Global::ScreenY), "MyWindow");
 	sf::Vector2f direction;
+	sf::Vector2f directionRotation; 
+	sf::Vector2f NormalPlayerMouse; 
 	sf::Vector2i oMousePosition;
+	sf::Vector2i oMousePositionForRotation; 
 	sf::Event event;
 	sf::Vector2f o_MouseRot; 
 	sf::Vector2f o_NormalCanon; 
@@ -71,7 +74,15 @@ void main() {
 		{
 			direction.y *= -1;
 		}
-		
+		oMousePositionForRotation.x = event.mouseMove.y; 
+		oMousePositionForRotation.y = event.mouseMove.x; 
+		directionRotation = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePositionForRotation);
+		angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi); 
+		p->getPlayer().setRotation(angle);
+
+
+
+
 		for (int i = 0; i < Global::level; i++) {
 			for (int j = 0; j < Global::nbBrick; j++) {
 				window.draw(gm->getBrick(i, j)->getBrick());
