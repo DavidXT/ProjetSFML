@@ -1,13 +1,13 @@
-#include <SFML/Graphics.hpp>
-#include "Global.h"
+#include "Entity.h"
 #include "Brick.h"
 
 Brick::Brick(int x, int y, int hp)
 {
-	brick.setSize(sf::Vector2f(50, 80));
-	brick.setPosition(y,x);
-	brick.setOrigin(0, 0);
-	brick.setSize(sf::Vector2f(Global::sizeXBrick,Global::sizeYBrick));
+	_shape = new sf::RectangleShape(sf::Vector2f(Global::sizeXBrick, Global::sizeYBrick));
+	_shape->setPosition(y,x);
+	_shape->setOrigin(0, 0);
+	_shape->setOutlineColor(sf::Color::Black);
+	_shape->setOutlineThickness(-1);
 	isDestroyed = false;
 	lifePoint = hp;
 	switch (lifePoint)
@@ -16,20 +16,20 @@ Brick::Brick(int x, int y, int hp)
 		isDestroyed = true;
 		break;
 	case 1:
-		brick.setFillColor(sf::Color::Green);
+		_shape->setFillColor(sf::Color::Green);
 		break;
 	case 2:
-		brick.setFillColor(sf::Color::Blue);
+		_shape->setFillColor(sf::Color::Blue);
 		break;
 	case 3:
-		brick.setFillColor(sf::Color::Red);
+		_shape->setFillColor(sf::Color::Red);
 		break;
 	}
 }
 
-sf::RectangleShape& Brick::getBrick()
+sf::Shape& Brick::getBrick()
 {
-	return brick;
+	return *_shape;
 }
 
 void Brick::getDamage() {
@@ -40,13 +40,13 @@ void Brick::getDamage() {
 			isDestroyed = true;
 			break; 
 		case 1 : 
-			brick.setFillColor(sf::Color::Green);
+			_shape->setFillColor(sf::Color::Green);
 			break; 
 		case 2 :
-			brick.setFillColor(sf::Color::Blue);
+			_shape->setFillColor(sf::Color::Blue);
 			break; 
 		case 3 : 
-			brick.setFillColor(sf::Color::Red);
+			_shape->setFillColor(sf::Color::Red);
 			break; 
 	}
 		

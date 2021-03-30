@@ -1,25 +1,55 @@
 #include "Player.h"
-#include "Global.h"
 #include "Ball.h"
 
-Ball::Ball()
+Ball::Ball(int _radius)
 {
-	b.setRadius(10);
-	b.setOrigin(b.getRadius() * 0.5, b.getRadius() * 2);
-	BoxCollision = b.getGlobalBounds(); 
-	//b.setPosition(Global::ScreenX / 2, Global::ScreenY/2);
+	_shape = new sf::CircleShape(_radius);
+	_shape->setOrigin(_radius * 0.5, _radius * 2);
+	BoxCollision = _shape->getGlobalBounds();
+	canShoot = true;
+	isNotCollide = true;
 }
 
-sf::CircleShape& Ball::getBall()
+sf::Shape& Ball::getBall()
 {
-	return b;
+	return *_shape;
 }
 
 void Ball::setBallPosition(sf::Vector2f cs)
 {
-	b.setPosition(cs);
+	_shape->setPosition(cs);
 }
 
 void Ball::moveBall(float deltaTime,sf::Vector2f target) {
-	b.move(0.0f, -Global::bulletSpeed*deltaTime);
+	_shape->move(0.0f, -Global::bulletSpeed*deltaTime);
+}
+
+void Ball::stopShoot()
+{
+	canShoot = false;
+}
+
+void Ball::reload()
+{
+	canShoot = true;
+}
+
+bool Ball::getShoot()
+{
+	return canShoot;
+}
+
+bool Ball::getIsNotCollide()
+{
+	return isNotCollide;
+}
+
+void Ball::StopCollide()
+{
+	isNotCollide = true;
+}
+
+void Ball::Collide()
+{
+	isNotCollide = false;
 }

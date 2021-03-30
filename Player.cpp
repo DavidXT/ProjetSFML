@@ -1,36 +1,35 @@
 #include "Player.h"
-#include "Global.h"
 
-Player::Player() {
-	p.setSize(sf::Vector2f(70, 120)); 
-	p.setOrigin(p.getSize().x * 0.5, p.getSize().y * 0.5);
-	p.setPosition(Global::ScreenX / 2, Global::ScreenY);
-	BoxCollision = p.getGlobalBounds(); 
-	p.setFillColor(sf::Color(255, 106, 3, 255));
+Player::Player(sf::Vector2f _size) {
+	_shape = new sf::RectangleShape(_size);
+	_shape->setOrigin(_size.x * 0.5, _size.y * 0.5);
+	_shape->setPosition(Global::ScreenX / 2, Global::ScreenY);
+	BoxCollision = _shape->getGlobalBounds();
+	_shape->setFillColor(sf::Color(255, 106, 3, 255));
 }
 
 
 void Player::moveDown(float deltaTime) {
-	p.move(0.0f, Global::playerSpeed * deltaTime);
+	_shape->move(0.0f, Global::playerSpeed * deltaTime);
 }
 
-sf::RectangleShape& Player::getPlayer() {
-	return p;
+sf::Shape& Player::getPlayer() {
+	return *_shape;
 }
 void Player::moveUp(float deltaTime) {
-	p.move(0.0f, -Global::playerSpeed * deltaTime);
+	_shape->move(0.0f, -Global::playerSpeed * deltaTime);
 }
 
 void Player::moveRight(float deltaTime) {
-	p.move(Global::playerSpeed * deltaTime, 0.0f);
+	_shape->move(Global::playerSpeed * deltaTime, 0.0f);
 }
 
 void Player::moveLeft(float deltaTime)
 {
-	p.move(-Global::playerSpeed * deltaTime, 0.0f);
+	_shape->move(-Global::playerSpeed * deltaTime, 0.0f);
 }
 
 sf::Vector2f Player::GetPlayerPosition() 
 {
-	return p.getPosition(); 
+	return _shape->getPosition(); 
 }

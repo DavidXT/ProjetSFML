@@ -1,14 +1,22 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-class Ball
+#include "Entity.h"
+class Ball:public Entity
 {
 public:
-	Ball();
-	sf::CircleShape& getBall();
+	Ball(int);
+	sf::Shape& getBall();
 	void setBallPosition(sf::Vector2f);
 	void moveBall(float,sf::Vector2f);
+	void stopShoot();
+	void reload();
+	bool getShoot();
+	bool getIsNotCollide();
+	void StopCollide();
+	void Collide();
+	sf::Vector2f direction;
+
 private:
-	sf::CircleShape b;
-	sf::FloatRect BoxCollision; 
+	bool canShoot;
+	bool isNotCollide;
 };
 

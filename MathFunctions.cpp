@@ -1,3 +1,4 @@
+#include "Global.h"
 #include "MathFunctions.h"
 sf::Vector2f MathFunctions::Normalize(sf::Vector2f vector) {
 	double norme = sqrt(vector.x * vector.x + vector.y * vector.y); 

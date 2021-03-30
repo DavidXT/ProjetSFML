@@ -1,15 +1,13 @@
 #pragma once
-
-class Brick
+#include "Entity.h"
+class Brick:public Entity
 {
 public: 
 	Brick(int,int, int);
-	sf::RectangleShape& getBrick();
+	sf::Shape& getBrick();
 	bool& getDestroyed();
 	void getDamage();
 private:
-	sf::RectangleShape brick;
-	sf::FloatRect BoxCollision;
 	sf::Vector2f Size;
 	bool isDestroyed;
 	int lifePoint;
