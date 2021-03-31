@@ -5,7 +5,7 @@
 
 
 
-gameManager::gameManager(int nbLine)
+gameManager::gameManager(int nbLine) 
 {
 	int sizeY = Global::ScreenY;
 	int nbBrick = sizeY/100;
@@ -22,9 +22,17 @@ gameManager::gameManager(int nbLine)
 			
 		}
 	}
+	Vec_Plat.push_back(new PlatForm(1)); 
+	Vec_Plat.push_back(new PlatForm(3));
 }
 
 Brick* gameManager::getBrick(int x, int y)
 {
 	return AllBrick[x][y];
 }
+
+PlatForm* gameManager::GetPlatForm(int i )
+{
+	return Vec_Plat[i]; 
+}
+

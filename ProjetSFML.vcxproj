@@ -27,6 +27,7 @@
     <ClCompile Include="PlatForm.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Viseur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="PlatForm.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Viseur.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

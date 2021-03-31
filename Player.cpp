@@ -1,14 +1,18 @@
 #include "Player.h"
 #include "Global.h"
+#include "MathFunctions.h"
+#include "gameManager.h"
+#include <cmath>
+#include<iostream>
 
-Player::Player() {
-	p.setSize(sf::Vector2f(70, 120)); 
+Player::Player()
+{
+	p.setSize(sf::Vector2f(70, 120));
 	p.setOrigin(p.getSize().x * 0.5, p.getSize().y * 0.5);
 	p.setPosition(Global::ScreenX / 2, Global::ScreenY);
-	BoxCollision = p.getGlobalBounds(); 
+	BoxCollision = p.getGlobalBounds();
 	p.setFillColor(sf::Color(255, 106, 3, 255));
 }
-
 
 void Player::moveDown(float deltaTime) {
 	p.move(0.0f, Global::playerSpeed * deltaTime);

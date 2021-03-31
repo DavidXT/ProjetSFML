@@ -19,6 +19,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="PlatForm.cpp" />
+    <ClCompile Include="Viseur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
@@ -40,6 +41,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="PlatForm.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Viseur.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

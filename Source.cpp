@@ -4,14 +4,16 @@
 #include "MathFunctions.h"
 #include <iostream>
 #include "gameManager.h"
+#include "Viseur.h"
 
 void main() {
 	srand(time(NULL)); 
-	gameManager* gm = new gameManager(Global::level);
-	Player* p = new Player();
 	Ball* b = new Ball();
 	sf::Clock clock; 
 	sf::RenderWindow window(sf::VideoMode(Global::ScreenX, Global::ScreenY), "MyWindow");
+	gameManager* gm = new gameManager(Global::level);
+	Player* p = new Player(window, gm);
+	Viseur* oViseur = new Viseur(window);  
 	sf::Vector2f direction;
 	sf::Vector2f directionRotation; 
 	sf::Vector2f NormalPlayerMouse; 
@@ -72,11 +74,10 @@ void main() {
 		}
 		oMousePositionForRotation = sf::Mouse::getPosition(window);
 		directionRotation = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePositionForRotation);
-		angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi); 
-		p->getPlayer().setRotation(angle);
-
-
-
+		directionRotation = MathFunctions::Normalize(directionRotation); 
+		p->angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi); 
+		oViseur->Project(oMousePositionForRotation, p->GetPlayerPosition(), directionRotation); 
+		p->getPlayer().setRotation(p->angle);
 
 		for (int i = 0; i < Global::level; i++) {
 			for (int j = 0; j < Global::nbBrick; j++) {
@@ -109,8 +110,13 @@ void main() {
 				}
 			}
 		}
+		gm->GetPlatForm(0)->Collide(b, isNotCollide, direction); 
+		window.draw(gm->GetPlatForm(0)->GetPlateform()); 
+		gm->GetPlatForm(1)->Collide(b, isNotCollide, direction);
+		window.draw(gm->GetPlatForm(1)->GetPlateform());
 		window.draw(b->getBall());
-		window.draw(p->getPlayer());
+		oViseur->draw();
+		window.draw(p->getPlayer()); 
 		window.display();
 	}
 }
