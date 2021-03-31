@@ -1,21 +1,19 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "gameManager.h"
-class Player
+#include "Entity.h"
+class Player:public Entity
 {
 public:
-	Player();
+	Player(sf::Vector2f);
 	void moveLeft(float);
 	void moveRight(float);
 	void moveUp(float);
 	void moveDown(float);
 	sf::Vector2f GetPlayerPosition(); 
+	sf::Shape& getPlayer();
 	sf::RectangleShape& getPlayer();
 	float angle;
 	 
 private:
-	sf::RectangleShape p;
-	sf::FloatRect BoxCollision; 
 	sf::Vector2f Size;
 };
 

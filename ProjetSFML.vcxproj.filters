@@ -20,6 +20,7 @@
     <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="PlatForm.cpp" />
     <ClCompile Include="Viseur.cpp" />
+    <ClCompile Include="Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
@@ -40,7 +41,7 @@
     <ClInclude Include="gameManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="PlatForm.h">
+    <ClInclude Include="Entity.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Viseur.h">
