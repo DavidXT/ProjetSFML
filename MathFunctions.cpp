@@ -29,9 +29,3 @@ float MathFunctions::GetAngle(sf::Vector2f A, float globalangle, float pi)
 	float angle = atan2(A.x, A.y) * coeff * (-1); 
 	return angle; 
 }
-float MathFunctions::GetYComposante(float angle, sf::Vector2f A, sf::Vector2f B) {
-	sf::Vector2f C = ResultVectorFloat(A, B); 
-	float normeC = Norme(C); 
-	float vector = normeC / tan(angle); 
-	return vector;
-}

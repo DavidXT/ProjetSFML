@@ -6,7 +6,7 @@ class PlatForm
 public :
 	PlatForm(float);
 	sf::RectangleShape& GetPlateform();
-	void Collide(Ball*, bool, sf::Vector2f); 
+	void Collide(Ball&); 
 private:
 	sf::RectangleShape f;
 	sf::FloatRect BoxCollision;

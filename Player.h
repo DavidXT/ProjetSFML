@@ -10,7 +10,6 @@ public:
 	void moveDown(float);
 	sf::Vector2f GetPlayerPosition(); 
 	sf::Shape& getPlayer();
-	sf::RectangleShape& getPlayer();
 	float angle;
 	 
 private:

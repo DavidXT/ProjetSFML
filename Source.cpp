@@ -29,11 +29,8 @@ void main() {
 	sf::RenderWindow window(sf::VideoMode(Global::ScreenX, Global::ScreenY), "MyWindow");
 	sf::Event event;
 	sf::Vector2f directionRotation;
-	gameManager* gm = new gameManager(Global::level);
-	Player* p = new Player(window, gm);
-	Viseur* oViseur = new Viseur(window);  
-	sf::Vector2f direction;
-	sf::Vector2f directionRotation; 
+
+	Viseur* oViseur = new Viseur(window);   
 	sf::Vector2f NormalPlayerMouse; 
 	sf::Vector2i oMousePosition;
 	sf::Vector2i oMousePositionForRotation;
@@ -76,6 +73,7 @@ void main() {
 				}
 			}
 		}
+		oViseur->Project(oMousePositionForRotation, p->GetPlayerPosition(), directionRotation);
 		for (int b = 0; b < Global::nbBall; b++) {
 			gm->getBall(b).CheckScreen(deltaTime,p);
 
@@ -83,7 +81,8 @@ void main() {
 			directionRotation = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePositionForRotation);
 			angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi);
 			p->getPlayer().setRotation(angle);
-
+			gm->GetPlatForm(0)->Collide(gm->getBall(b));
+			gm->GetPlatForm(1)->Collide(gm->getBall(b));
 			/* Brick Collision */
 			for (int i = 0; i < Global::level; i++) {
 				for (int j = 0; j < Global::nbBrick; j++) {
@@ -96,7 +95,8 @@ void main() {
 		}
 		Global::canShoot = true;
 		tScore.setString("Score : " + std::to_string(Global::_score));
-
+		
+		
 		/*Draw*/
 		for (int b = 0; b < Global::nbBall; b++) {
 			if (!gm->getBall(b).getShoot()) {
@@ -105,11 +105,8 @@ void main() {
 		}
 		window.draw(p->getPlayer());
 		window.draw(tScore);
-		gm->GetPlatForm(0)->Collide(b, isNotCollide, direction); 
 		window.draw(gm->GetPlatForm(0)->GetPlateform()); 
-		gm->GetPlatForm(1)->Collide(b, isNotCollide, direction);
 		window.draw(gm->GetPlatForm(1)->GetPlateform());
-		window.draw(b->getBall());
 		oViseur->draw();
 		window.draw(p->getPlayer()); 
 		window.display();
