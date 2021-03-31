@@ -31,3 +31,5 @@ Ball& gameManager::getBall(int i)
 {
 	return *AllBall[i];
 }
+
+

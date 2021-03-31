@@ -12,6 +12,5 @@ public:
 	sf::Shape& getPlayer();
 private:
 	sf::Vector2f Size;
-	
 };
 

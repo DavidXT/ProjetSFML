@@ -1,4 +1,3 @@
-#include "Player.h"
 #include "Ball.h"
 
 Ball::Ball(int _radius)
@@ -52,4 +51,31 @@ void Ball::StopCollide()
 void Ball::Collide()
 {
 	isNotCollide = false;
+}
+
+/* Check if ball go out of screen */
+void Ball::CheckScreen(float deltaTime,Player* p) {
+	if (!getShoot()) {
+		const sf::Vector2f& oPosition = getBall().getPosition();
+		float fX = oPosition.x + (direction.x * (float)Global::bulletSpeed * deltaTime);
+		float fY = oPosition.y + (direction.y * (float)Global::bulletSpeed * deltaTime);
+		getBall().setPosition(fX, fY);
+		if (getBall().getGlobalBounds().left < 0)
+		{
+			direction.x *= -1;
+		}
+		if (getBall().getGlobalBounds().left + getBall().getGlobalBounds().width > Global::ScreenX)
+		{
+			direction.x *= -1;
+		}
+		if (getBall().getGlobalBounds().top < 0)
+		{
+			direction.y *= -1;
+		}
+		if (getBall().getGlobalBounds().top + getBall().getGlobalBounds().height > Global::ScreenY)
+		{
+			setBallPosition(p->GetPlayerPosition());
+			reload();
+		}
+	}
 }
