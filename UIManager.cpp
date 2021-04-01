@@ -39,12 +39,17 @@ UIManager::UIManager()
 
 	//Load Music
 	WinTheme.openFromFile("Asset/Victory.wav");
+	WinTheme.setVolume(30);
 	GameOverTheme.openFromFile("Asset/GameOver.wav");
+	GameOverTheme.setVolume(30);
 	MainTheme.openFromFile("Asset/GetDown.wav");
+	MainTheme.setVolume(30);
 	shootbuffer.loadFromFile("Asset/Shoot.wav"); 
 	hitbuffer.loadFromFile("Asset/Hit.wav"); 
 	shoot.setBuffer(shootbuffer); 
+	shoot.setVolume(10);
 	hit.setBuffer(hitbuffer); 
+	hit.setVolume(10);
 	
 	
 }

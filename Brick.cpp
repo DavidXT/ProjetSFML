@@ -80,6 +80,8 @@ void Brick::CheckCollision(Ball& b, sf::Sound& hit) {
 		}
 		hit.play(); 
 		getDamage();
-	}
+	}else{
 		b.StopCollide();
+	}
+
 }
