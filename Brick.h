@@ -7,11 +7,11 @@ public:
 	Brick(int,int, int); //Brick constructor
 	sf::Shape& getBrick(); //Get Shape of brick
 	bool& getDestroyed(); //Check if brick is destroyed
-	void setDestroyed();
-	void resetDestroyed();
+	void setDestroyed(); //Change state of brick
+	void resetDestroyed(); //Change state of brick
 	void getDamage(); //Damage brick
-	void CheckColor();
-	void CheckCollision(Ball& b);
+	void CheckColor(); //Change color of brick
+	void CheckCollision(Ball& b); //Check collision with ball
 private:
 	sf::Vector2f Size; //Size of brick
 	bool isDestroyed; //Is Destroyed boolean

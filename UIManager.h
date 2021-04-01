@@ -8,7 +8,7 @@ public:
 	sf::Text tScore;
 	sf::Text tBullet;
 	sf::Text gameOver;
+	sf::Text win;
 private:
-
 };
 

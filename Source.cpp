@@ -17,6 +17,7 @@ void main() {
 	UIManager* UI = new UIManager();
 	Player* p = new Player(sf::Vector2f(40,70));
 
+	/* variables */
 	sf::Clock clock; 
 	sf::RenderWindow window(sf::VideoMode(Global::ScreenX, Global::ScreenY), "MyWindow");
 	sf::Event event;
@@ -32,63 +33,79 @@ void main() {
 		float deltaTime = clock.restart().asSeconds();
 		window.clear(sf::Color::Black);
 		if (Global::_score >= 0) {
-			while (window.pollEvent(event)) {
+			if (!gm->checkWin()) {
+				while (window.pollEvent(event)) {
+					for (int b = 0; b < Global::nbBall; b++) {
+						Ball& tmpBall = gm->getBall(b);
+						/* Canon Shoot */
+						if (event.type == sf::Event::MouseButtonPressed && Global::canShoot)
+						{
+							if (tmpBall.getShoot()) {
+								Global::canShoot = false;
+								tmpBall.setBallPosition(p->GetPlayerPosition());
+								oMousePosition = sf::Mouse::getPosition(window);
+								tmpBall.direction = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePosition);
+								tmpBall.direction = MathFunctions::Normalize(tmpBall.direction);
+								tmpBall.stopShoot();
+							}
+						}
+					}
+				}
+				oViseur->Project(oMousePositionForRotation, p->GetPlayerPosition(), directionRotation, gm);
 				for (int b = 0; b < Global::nbBall; b++) {
+					Ball& tmpBall = gm->getBall(b);
+					tmpBall.CheckScreen(deltaTime, p);
+					oMousePositionForRotation = sf::Mouse::getPosition(window);
+					directionRotation = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePositionForRotation);
+					angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi);
+					p->getPlayer().setRotation(angle);
+					gm->GetPlatForm(0)->Collide(tmpBall);
+					gm->GetPlatForm(1)->Collide(tmpBall);
 
-					/* Canon Shoot */
-					if (event.type == sf::Event::MouseButtonPressed && Global::canShoot)
-					{
-						if (gm->getBall(b).getShoot()) {
-							Global::canShoot = false;
-							gm->getBall(b).setBallPosition(p->GetPlayerPosition());
-							oMousePosition = sf::Mouse::getPosition(window);
-							gm->getBall(b).direction = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePosition);
-							gm->getBall(b).direction = MathFunctions::Normalize(gm->getBall(b).direction);
-							gm->getBall(b).stopShoot();
+					/* Brick Collision */
+					for (int i = 0; i < Global::BrickLineCount; i++) {
+						for (int j = 0; j < Global::BrickColumnCount; j++) {
+							if (!gm->getBrick(i, j)->getDestroyed()) {
+								gm->getBrick(i, j)->CheckCollision(tmpBall);
+								window.draw(gm->getBrick(i, j)->getBrick());
+							}
 						}
 					}
 				}
-			}
-			oViseur->Project(oMousePositionForRotation, p->GetPlayerPosition(), directionRotation, gm);
-			for (int b = 0; b < Global::nbBall; b++) {
-				gm->getBall(b).CheckScreen(deltaTime, p);
-				oMousePositionForRotation = sf::Mouse::getPosition(window);
-				directionRotation = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePositionForRotation);
-				angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi);
-				p->getPlayer().setRotation(angle);
-				gm->GetPlatForm(0)->Collide(gm->getBall(b));
-				gm->GetPlatForm(1)->Collide(gm->getBall(b));
-				/* Brick Collision */
-				for (int i = 0; i < Global::BrickLineCount; i++) {
-					for (int j = 0; j < Global::BrickColumnCount; j++) {
-						if (!gm->getBrick(i, j)->getDestroyed()) {
-							gm->getBrick(i, j)->CheckCollision(gm->getBall(b));
-							window.draw(gm->getBrick(i, j)->getBrick());
-						}
+				Global::canShoot = true;
+				/* Setup score and number of bullet */
+				UI->tScore.setString("Score : " + std::to_string(Global::_score));
+				UI->tBullet.setString("Bullet : " + std::to_string(Global::dispoBall));
+
+				/*Draw*/
+				for (int b = 0; b < Global::nbBall; b++) {
+					if (!gm->getBall(b).getShoot()) {
+						window.draw(gm->getBall(b).getBall());
 					}
 				}
+				window.draw(p->getPlayer());
+				window.draw(UI->tScore);
+				window.draw(UI->tBullet);
+				window.draw(gm->GetPlatForm(0)->GetPlateform());
+				window.draw(gm->GetPlatForm(1)->GetPlateform());
+				oViseur->draw();
+				window.draw(p->getPlayer());
+				window.display();
+			}else{
+				/* Draw win screen */
+				UI->tScore.setPosition(Global::ScreenX / 2.5, Global::ScreenY / 2);
+				window.draw(UI->tScore);
+				window.draw(UI->win);
+				window.display();
 			}
-			Global::canShoot = true;
-			UI->tScore.setString("Score : " + std::to_string(Global::_score));
-			UI->tBullet.setString("Bullet : " + std::to_string(Global::dispoBall));
 
-			/*Draw*/
-			for (int b = 0; b < Global::nbBall; b++) {
-				if (!gm->getBall(b).getShoot()) {
-					window.draw(gm->getBall(b).getBall());
-				}
-			}
-			window.draw(p->getPlayer());
-			window.draw(UI->tScore);
-			window.draw(UI->tBullet);
-			window.draw(gm->GetPlatForm(0)->GetPlateform());
-			window.draw(gm->GetPlatForm(1)->GetPlateform());
-			oViseur->draw();
-			window.draw(p->getPlayer());
-			window.display();
 		}
 		else {
+			/* Draw lose screen */
+			UI->tScore.setString("Score : " + std::to_string(Global::_score));
+			UI->tScore.setPosition(Global::ScreenX / 2, Global::ScreenY / 2);
 			window.draw(UI->gameOver);
+			window.draw(UI->tScore);
 			window.display();
 		}
 	}

@@ -5,17 +5,16 @@
 class gameManager
 {
 public: 
-	gameManager(int);
-	Brick* getBrick(int,int);
-	Ball& getBall(int);
-	sf::Text getScore();
-	void setScore();
-	PlatForm* GetPlatForm(int);
-	int GetAllBricks(); 
-	std::vector<std::vector<Brick*>> AllBrick;
+	gameManager(int); //Constructor
+	Brick* getBrick(int,int); //Return brick at index i,j
+	Ball& getBall(int); // Return ball at index i
+	PlatForm* GetPlatForm(int); //Return platform at index i
+	int GetAllBricks();  //Return all brick
+	bool checkWin(); //Return state of game
+	std::vector<std::vector<Brick*>> AllBrick; // Table of all brick
 private:
-	Ball* AllBall[Global::nbBall];
-	std::vector<PlatForm*> Vec_Plat;
+	Ball* AllBall[Global::nbBall]; // Table of all ball
+	std::vector<PlatForm*> Vec_Plat; //Table of all platform
 private:
 	
 };

@@ -27,6 +27,14 @@ UIManager::UIManager()
 	gameOver.setStyle(sf::Text::Bold);
 	gameOver.setFillColor(sf::Color::Red);
 	gameOver.setString("GAME OVER");
+
+	/*WinScreen text*/
+	win.setPosition(Global::ScreenX / 3, Global::ScreenY / 3);
+	win.setFont(font);
+	win.setCharacterSize(50);
+	win.setStyle(sf::Text::Bold);
+	win.setFillColor(sf::Color::Red);
+	win.setString("YOU WIN");
 }
 
 

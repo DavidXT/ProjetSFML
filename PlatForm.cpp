@@ -2,6 +2,7 @@
 #include "PlatForm.h"
 #include <iostream>
 
+/* Constructor */
 PlatForm::PlatForm(float _CoeffPos)
 {
 	CoeffPos = _CoeffPos;
@@ -10,19 +11,23 @@ PlatForm::PlatForm(float _CoeffPos)
 	f.setPosition(Global::ScreenX / 4 * CoeffPos, Global::ScreenY);
 	BoxCollision = f.getGlobalBounds();
 }
+/* Return shape */
 sf::RectangleShape& PlatForm::GetPlateform()
 {
 	return f;
 }
+
+/* Check collision with a ball */
 void PlatForm::Collide(Ball& b) 
 {
-	
-		sf::Shape& tempRect = GetPlateform(); 
-		if (b.getBall().getGlobalBounds().intersects(tempRect.getGlobalBounds()) && b.getIsNotCollide())
+		sf::FloatRect BallRect = b.getBall().getGlobalBounds();
+		sf::FloatRect tempRect = GetPlateform().getGlobalBounds();
+		if (BallRect.intersects(tempRect) && b.getIsNotCollide())
 		{
-			float t_collision = b.getBall().getGlobalBounds().top + b.getBall().getGlobalBounds().height - tempRect.getGlobalBounds().top;
-			float l_collision = b.getBall().getGlobalBounds().left + b.getBall().getGlobalBounds().width - tempRect.getGlobalBounds().left;
-			float r_collision = tempRect.getGlobalBounds().left + tempRect.getGlobalBounds().width - b.getBall().getGlobalBounds().left;
+			b.Collide();
+			float t_collision = BallRect.top + BallRect.height - tempRect.top;
+			float l_collision = BallRect.left + BallRect.width - tempRect.left;
+			float r_collision = tempRect.left + tempRect.width - BallRect.left;
 			if (t_collision <= l_collision && t_collision <= r_collision) 
 			{
 				if (l_collision <= r_collision && l_collision <= t_collision || r_collision <= l_collision && r_collision <= t_collision) 
@@ -35,7 +40,6 @@ void PlatForm::Collide(Ball& b)
 			{
 				b.direction.x *= -1;
 			}
-			b.Collide();
 		}
 		else 
 		{

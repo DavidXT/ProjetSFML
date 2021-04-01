@@ -50,39 +50,35 @@ bool& Brick::getDestroyed() {
 	return isDestroyed;
 }
 
+/* Change state of brick */
 void Brick::setDestroyed() {
 	isDestroyed = true;
 }
-
+/* Change state of brick */
 void Brick::resetDestroyed()
 {
 	isDestroyed = false;
 }
 
+/* Check collision with ball */
 void Brick::CheckCollision(Ball& b) {
 	sf::FloatRect tmpRect = getBrick().getGlobalBounds();
 	sf::FloatRect BallRect = b.getBall().getGlobalBounds();
 	if (BallRect.intersects(tmpRect) && b.getIsNotCollide()) {
+		b.Collide();
 		float b_collision = tmpRect.top + tmpRect.height - BallRect.top; //Bottom 
 		float t_collision = BallRect.top + BallRect.height - tmpRect.top; //Top
 		float l_collision = BallRect.left + BallRect.width - tmpRect.left; //Left
 		float r_collision = tmpRect.left + tmpRect.width - BallRect.left; //Right
-		if (t_collision <= b_collision && t_collision <= l_collision && t_collision <= r_collision || b_collision <= t_collision && b_collision <= l_collision && b_collision <= r_collision)
+		if ((t_collision <= b_collision && t_collision <= l_collision && t_collision <= r_collision) || (b_collision <= t_collision && b_collision <= l_collision && b_collision <= r_collision))
 		{
-			if (l_collision <= r_collision && l_collision <= t_collision && l_collision <= b_collision || r_collision <= l_collision && r_collision <= t_collision && r_collision <= b_collision)
-			{
-				b.direction.x *= -1;
-			}
 			b.direction.y *= -1;
 		}
-		if (l_collision <= r_collision && l_collision <= t_collision && l_collision <= b_collision || r_collision <= l_collision && r_collision <= t_collision && r_collision <= b_collision)
+		if ((l_collision <= r_collision && l_collision <= t_collision && l_collision <= b_collision) || (r_collision <= l_collision && r_collision <= t_collision && r_collision <= b_collision))
 		{
 			b.direction.x *= -1;
 		}
-		b.Collide();
 		getDamage();
 	}
-	else {
 		b.StopCollide();
-	}
 }

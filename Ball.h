@@ -7,7 +7,6 @@ public:
 	Ball(int); //Constructor Ball
 	sf::Shape& getBall(); //Get Ball Shape
 	void setBallPosition(sf::Vector2f); //Set Ball Position
-	void moveBall(float,sf::Vector2f); //Move Ball Position
 	void stopShoot(); //Can't shoot ball
 	void reload(); //Can shoot ball
 	bool getShoot(); //Get if can shoot 

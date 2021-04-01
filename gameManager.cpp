@@ -2,14 +2,9 @@
 #include "Global.h"
 #include "gameManager.h"
 
+/* Constructor */
 gameManager::gameManager(int nbLine)
 {
-	std::string ligne[Global::BrickLineCount][Global::BrickColumnCount] = 
-		{ "X","O" ,"O","O","X","X","X","X",
-		"X","O" ,"O","O","X","O","O","X",
-		"X","X" ,"O","X","X","O","X","X",
-		"X","O" ,"X","O","X","X","O","O",
-		"X","O" ,"O","O","X","X","X","X"};
 	for (int i = 0; i < nbLine; i++) {
 		std::vector<Brick*> Line;
 		for (int j = 0; j < Global::BrickColumnCount; j++) {
@@ -20,17 +15,12 @@ gameManager::gameManager(int nbLine)
 	for (int i = 0; i < nbLine; i++) {
 		for (int j = 0; j < Global::BrickColumnCount; j++) {
 			AllBrick[i][j] = new Brick(Global::sizeYBrick * i, Global::sizeXBrick * j, rand() % 3 + 1);
-		}
-	}
-	int k = 0;
-	for (int i = 0; i < nbLine; i++) {
-		for (int j = 0; j < Global::BrickColumnCount; j++) {
-				if (ligne[i][j] == "O") {
-					AllBrick[i][j]->resetDestroyed();
-				}
-				else {
-					AllBrick[i][j]->setDestroyed();
-				}
+			if (Global::map[i][j] == "O") {
+				AllBrick[i][j]->resetDestroyed();
+			}
+			else {
+				AllBrick[i][j]->setDestroyed();
+			}
 		}
 	}
 
@@ -41,19 +31,38 @@ gameManager::gameManager(int nbLine)
 	Vec_Plat.push_back(new PlatForm(3));
 }
 
+/* Return brick at index x y */
 Brick* gameManager::getBrick(int x, int y)
 {
 	return AllBrick[x][y];
 }
 
+/* Return ball at index i */
 Ball& gameManager::getBall(int i)
 {
 	return *AllBall[i];
 }
+
+/* Return all brick */
 int gameManager::GetAllBricks() 
 {
 	return AllBrick.size(); 
 }
+
+/* Return state of the game */
+bool gameManager::checkWin()
+{
+	for (int i = 0; i < Global::BrickLineCount; i++) {
+		for (int j = 0; j < Global::BrickColumnCount; j++) {
+			if (!AllBrick[i][j]->getDestroyed()) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+/* Return platform at index i */
 PlatForm* gameManager::GetPlatForm(int i )
 {
 	return Vec_Plat[i]; 

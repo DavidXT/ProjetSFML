@@ -9,6 +9,7 @@ public:
 	static const int ScreenX = 800;
 	static const int ScreenY = 600;
 
+
 	/*Brick level Manager*/
 	static const int BrickLineCount = 5;
 	static const int BrickColumnCount = ScreenX/100;
@@ -20,7 +21,7 @@ public:
 	static const float Pi; 
 
 	/*Ball manager*/
-	static const int nbBall = 10;
+	static const int nbBall = 3;
 	static const int ballSize = 10;
 	static bool canShoot;
 	static const int nbPlatforms = 2; 
@@ -28,4 +29,8 @@ public:
 
 	/*Var UI*/
 	static int _score;
+	static bool isWin;
+
+	/* MAP */
+	static std::string map[BrickLineCount][BrickColumnCount];
 };

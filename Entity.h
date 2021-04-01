@@ -8,6 +8,5 @@ protected:
 	sf::FloatRect BoxCollision;
 public:
 	Entity();
-
 };
 
