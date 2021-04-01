@@ -18,11 +18,13 @@ sf::RectangleShape& PlatForm::GetPlateform()
 // Fonction de collision entre la plateforme et la balle 
 void PlatForm::Collide(Ball& b) 
 {
+		sf::FloatRect BallRect = b.getBall().getGlobalBounds();
 		// on récupère la plateforme
-		sf::Shape& tempRect = GetPlateform(); 
+		sf::FloatRect tempRect = GetPlateform().getGlobalBounds();
 		// si la balle touche un des trois côtés visibles de la plateforme, on la revoie 
-		if (b.getBall().getGlobalBounds().intersects(tempRect.getGlobalBounds()) && b.getIsNotCollide())
+		if (BallRect.intersects(tempRect) && b.getIsNotCollide())
 		{
+			// pour que la balle ne touche deux fois la plateforme
 			b.Collide();
 			float t_collision = BallRect.top + BallRect.height - tempRect.top;
 			float l_collision = BallRect.left + BallRect.width - tempRect.left;
@@ -39,8 +41,6 @@ void PlatForm::Collide(Ball& b)
 			{
 				b.direction.x *= -1;
 			}
-			// pour que la balle ne touche deux fois la plateforme
-			b.Collide();
 		}
 		else 
 		{
