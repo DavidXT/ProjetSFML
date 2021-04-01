@@ -4,7 +4,12 @@
 
 gameManager::gameManager(int nbLine)
 {
-	std::string ligne = "OXXXXXXXOXXXXXXXXXXXXXXX";
+	std::string ligne[Global::BrickLineCount][Global::BrickColumnCount] = 
+		{ "X","O" ,"O","O","X","X","X","X",
+		"X","O" ,"O","O","X","O","O","X",
+		"X","X" ,"O","X","X","O","X","X",
+		"X","O" ,"X","O","X","X","O","O",
+		"X","O" ,"O","O","X","X","X","X"};
 	for (int i = 0; i < nbLine; i++) {
 		std::vector<Brick*> Line;
 		for (int j = 0; j < Global::BrickColumnCount; j++) {
@@ -20,17 +25,12 @@ gameManager::gameManager(int nbLine)
 	int k = 0;
 	for (int i = 0; i < nbLine; i++) {
 		for (int j = 0; j < Global::BrickColumnCount; j++) {
-			if (k <= ligne.length()) {
-				if (ligne[k] == 'O') {
+				if (ligne[i][j] == "O") {
 					AllBrick[i][j]->resetDestroyed();
-					k++;
 				}
 				else {
 					AllBrick[i][j]->setDestroyed();
-					k++;
 				}
-			}
-
 		}
 	}
 
