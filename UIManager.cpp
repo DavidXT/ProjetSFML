@@ -1,5 +1,6 @@
 #include "Global.h";
 #include "UIManager.h"
+#include "Global.h"
 
 UIManager::UIManager()
 {
@@ -35,6 +36,45 @@ UIManager::UIManager()
 	win.setStyle(sf::Text::Bold);
 	win.setFillColor(sf::Color::Red);
 	win.setString("YOU WIN");
+
+	//Load Music
+	WinTheme.openFromFile("Asset/Victory.wav");
+	GameOverTheme.openFromFile("Asset/GameOver.wav");
+	MainTheme.openFromFile("Asset/GetDown.wav");
+	shootbuffer.loadFromFile("Asset/Shoot.wav"); 
+	hitbuffer.loadFromFile("Asset/Hit.wav"); 
+	shoot.setBuffer(shootbuffer); 
+	hit.setBuffer(hitbuffer); 
+	
+	
+}
+int UIManager::MusicManager(gameManager* gm) 
+{
+	////if (!gm->checkWin() && Global::_score > 0) 
+	////{
+	////	if (!)
+	////		return -1; 
+	////	MainTheme.play();
+	////	MainTheme.setVolume(70);
+	////	//MainTheme.setLoop(true); 
+	////}
+	////else 
+	////{
+	////	MainTheme.stop(); 
+	////}
+	//if (gm->checkWin())
+	//{
+	//	WinTheme.play();
+	//	WinTheme.setVolume(50);
+	//}
+	//if (Global::_score < 0)
+	//{
+	//	if (!)
+	//		return -1;
+	//	GameOverTheme.play();
+	//	GameOverTheme.setVolume(50);
+	//}
+	return 1; 
 }
 
 

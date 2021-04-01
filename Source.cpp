@@ -30,7 +30,7 @@ void main() {
 
 	float angle; 
 	while (window.isOpen()) {
-		float deltaTime = clock.restart().asSeconds();
+		float deltaTime = clock.restart().asSeconds(); 
 		window.clear(sf::Color::Black);
 		if (Global::_score >= 0) {
 			if (!gm->checkWin()) {
@@ -40,7 +40,8 @@ void main() {
 						/* Canon Shoot */
 						if (event.type == sf::Event::MouseButtonPressed && Global::canShoot)
 						{
-							if (tmpBall.getShoot()) {
+							if (tmpBall.getShoot()) { 
+								UI->shoot.play();
 								Global::canShoot = false;
 								tmpBall.setBallPosition(p->GetPlayerPosition());
 								oMousePosition = sf::Mouse::getPosition(window);
@@ -59,14 +60,14 @@ void main() {
 					directionRotation = MathFunctions::ResultVector(p->GetPlayerPosition(), oMousePositionForRotation);
 					angle = MathFunctions::GetAngle(directionRotation, Global::Angle, Global::Pi);
 					p->getPlayer().setRotation(angle);
-					gm->GetPlatForm(0)->Collide(tmpBall);
-					gm->GetPlatForm(1)->Collide(tmpBall);
+					gm->GetPlatForm(0)->Collide(tmpBall, UI->hit);
+					gm->GetPlatForm(1)->Collide(tmpBall, UI->hit);
 
 					/* Brick Collision */
 					for (int i = 0; i < Global::BrickLineCount; i++) {
 						for (int j = 0; j < Global::BrickColumnCount; j++) {
 							if (!gm->getBrick(i, j)->getDestroyed()) {
-								gm->getBrick(i, j)->CheckCollision(tmpBall);
+								gm->getBrick(i, j)->CheckCollision(tmpBall, UI->hit);
 								window.draw(gm->getBrick(i, j)->getBrick());
 							}
 						}
@@ -86,6 +87,11 @@ void main() {
 				window.draw(p->getPlayer());
 				window.draw(UI->tScore);
 				window.draw(UI->tBullet);
+				if (UI->MainTheme.getStatus() != sf::SoundSource::Status::Playing) 
+				{
+					UI->MainTheme.play(); 
+				}
+
 				window.draw(gm->GetPlatForm(0)->GetPlateform());
 				window.draw(gm->GetPlatForm(1)->GetPlateform());
 				oViseur->draw();
@@ -93,6 +99,14 @@ void main() {
 				window.display();
 			}else{
 				/* Draw win screen */
+				if (UI->MainTheme.getStatus() == sf::SoundSource::Status::Playing)
+				{
+					UI->MainTheme.stop();
+				}
+				if (UI->WinTheme.getStatus() != sf::SoundSource::Status::Playing)
+				{
+					UI->WinTheme.play();
+				}
 				UI->tScore.setPosition(Global::ScreenX / 2.5, Global::ScreenY / 2);
 				window.draw(UI->tScore);
 				window.draw(UI->win);
@@ -102,6 +116,14 @@ void main() {
 		}
 		else {
 			/* Draw lose screen */
+			if (UI->MainTheme.getStatus() == sf::SoundSource::Status::Playing)
+			{
+				UI->MainTheme.stop();
+			}
+			if (UI->GameOverTheme.getStatus() != sf::SoundSource::Status::Playing)
+			{
+				UI->GameOverTheme.play();
+			}
 			UI->tScore.setString("Score : " + std::to_string(Global::_score));
 			UI->tScore.setPosition(Global::ScreenX / 2, Global::ScreenY / 2);
 			window.draw(UI->gameOver);

@@ -61,7 +61,7 @@ void Brick::resetDestroyed()
 }
 
 /* Check collision with ball */
-void Brick::CheckCollision(Ball& b) {
+void Brick::CheckCollision(Ball& b, sf::Sound& hit) {
 	sf::FloatRect tmpRect = getBrick().getGlobalBounds();
 	sf::FloatRect BallRect = b.getBall().getGlobalBounds();
 	if (BallRect.intersects(tmpRect) && b.getIsNotCollide()) {
@@ -78,6 +78,7 @@ void Brick::CheckCollision(Ball& b) {
 		{
 			b.direction.x *= -1;
 		}
+		hit.play(); 
 		getDamage();
 	}
 		b.StopCollide();

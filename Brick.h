@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Ball.h"
+#include "SFML/Audio.hpp"
 class Brick:public Entity
 {
 public: 
@@ -11,7 +12,7 @@ public:
 	void resetDestroyed(); //Change state of brick
 	void getDamage(); //Damage brick
 	void CheckColor(); //Change color of brick
-	void CheckCollision(Ball& b); //Check collision with ball
+	void CheckCollision(Ball& b, sf::Sound&); //Check collision with ball
 private:
 	sf::Vector2f Size; //Size of brick
 	bool isDestroyed; //Is Destroyed boolean
