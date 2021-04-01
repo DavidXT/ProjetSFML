@@ -21,7 +21,8 @@ void main() {
 	sf::RenderWindow window(sf::VideoMode(Global::ScreenX, Global::ScreenY), "MyWindow");
 	sf::Event event;
 	sf::Vector2f directionRotation;
-	Viseur* oViseur = new Viseur(window);  
+
+	Viseur* oViseur = new Viseur(window);   
 	sf::Vector2f NormalPlayerMouse; 
 	sf::Vector2i oMousePosition;
 	sf::Vector2i oMousePositionForRotation;
