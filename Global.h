@@ -10,9 +10,9 @@ public:
 	static const int ScreenY = 600;
 
 	/*Brick level Manager*/
-	static const int level = 5;
-	static const int nbBrick = ScreenX/100;
-	static const int sizeXBrick = ScreenX / nbBrick;
+	static const int BrickLineCount = 5;
+	static const int BrickColumnCount = ScreenX/100;
+	static const int sizeXBrick = ScreenX / BrickColumnCount;
 	static const int sizeYBrick = 40;
 
 	/*Const math*/

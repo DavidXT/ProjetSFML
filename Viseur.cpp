@@ -1,14 +1,17 @@
 #include "Viseur.h"
 #include "Global.h"
 #include <iostream>
+#include "MathFunctions.h"
+#include "gameManager.h"
 
 Viseur::Viseur(sf::RenderWindow& renderWindow) : window(renderWindow)
 {
-	
+
 }
-void Viseur::Project(sf::Vector2i MousePosition, sf::Vector2f PlayerPosition, sf::Vector2f directionSecondRay )
+void Viseur::Project(sf::Vector2i MousePosition, sf::Vector2f PlayerPosition, sf::Vector2f directionSecondRay, gameManager* gm)
 {
 	float RayLength = 200; 
+	directionSecondRay = MathFunctions::Normalize(directionSecondRay);
 	sf::Vector2f oMouse = (sf::Vector2f)MousePosition; 
 	pente = (PlayerPosition.y - oMouse.y)/ (PlayerPosition.x - oMouse.x); 
 	origin = oMouse.y - pente * oMouse.x;
@@ -45,7 +48,35 @@ void Viseur::Project(sf::Vector2i MousePosition, sf::Vector2f PlayerPosition, sf
 		line[3].position.x = line[2].position.x + RayLength * directionSecondRay.x * (-1);
 		line[3].position.y = line[2].position.y + RayLength * directionSecondRay.y ;
 	}
-	
+	for (int i = Global::BrickLineCount-1; i >= 0 ; i--)
+	{
+		for (size_t j = 0; j < Global::BrickColumnCount; j++)
+		{
+			if (gm->getBrick(i, j)->getDestroyed())
+				continue;
+
+			sf::FloatRect BrickRect = gm->getBrick(i, j)->getBrick().getGlobalBounds();
+			sf::Vector2f BrickPosition = gm->getBrick(i, j)->getBrick().getPosition(); 
+			float Ybot = BrickRect.top + BrickRect.height;
+			float Xbot = (Ybot - origin) / pente;
+			float Xleft = BrickRect.left;
+			float Xright = BrickRect.left + BrickRect.width;
+			float Yleft = pente * Xleft + origin;
+			float Yright = pente * Xright + origin;
+				
+			if (Xbot > Xleft && Xbot < Xright) 
+			{
+				std::cout << i << " ; " << j << std::endl;
+
+				line[1].position.x = Xbot;
+				line[1].position.y = Ybot;
+				line[2].position = line[1].position;
+				line[3].position.x = line[2].position.x + RayLength * directionSecondRay.x;
+				line[3].position.y = line[2].position.y + RayLength * directionSecondRay.y * (-1);
+			}
+		}
+		
+	}
 }
 void Viseur::draw() {
 
