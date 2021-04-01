@@ -7,6 +7,8 @@ public:
 	Brick(int,int, int); //Brick constructor
 	sf::Shape& getBrick(); //Get Shape of brick
 	bool& getDestroyed(); //Check if brick is destroyed
+	void setDestroyed();
+	void resetDestroyed();
 	void getDamage(); //Damage brick
 	void CheckColor();
 	void CheckCollision(Ball& b);

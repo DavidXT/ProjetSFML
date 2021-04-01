@@ -24,6 +24,7 @@ public:
 	static const int ballSize = 10;
 	static bool canShoot;
 	static const int nbPlatforms = 2; 
+	static int dispoBall;
 
 	/*Var UI*/
 	static int _score;

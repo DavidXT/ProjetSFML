@@ -3,15 +3,15 @@
 #include "Ball.h"
 class PlatForm
 {
-public :
+public:
 	PlatForm(float);
 	sf::RectangleShape& GetPlateform();
-	void Collide(Ball*, bool, sf::Vector2f); 
+	void Collide(Ball&);
 private:
 	sf::RectangleShape f;
 	sf::FloatRect BoxCollision;
-	sf::Vector2f Size; 
-	float CoeffPos; 
+	sf::Vector2f Size;
+	float CoeffPos;
 
 
 };

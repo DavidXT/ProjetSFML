@@ -18,9 +18,10 @@
     <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="gameManager.cpp" />
-    <ClCompile Include="PlatForm.cpp" />
     <ClCompile Include="Viseur.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="PlatForm.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
@@ -45,6 +46,12 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Viseur.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatForm.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

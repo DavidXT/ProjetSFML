@@ -8,7 +8,7 @@ Brick::Brick(int x, int y, int hp)
 	_shape->setOrigin(0, 0);
 	_shape->setOutlineColor(sf::Color::Black);
 	_shape->setOutlineThickness(-1);
-	isDestroyed = false;
+	isDestroyed = true;
 	lifePoint = hp;
 	CheckColor();
 }
@@ -31,7 +31,7 @@ void Brick::CheckColor() {
 	{
 	case 0:
 		isDestroyed = true;
-		Global::_score += 1;
+		Global::_score += 15;
 		break;
 	case 1:
 		_shape->setFillColor(sf::Color::Green);
@@ -50,13 +50,23 @@ bool& Brick::getDestroyed() {
 	return isDestroyed;
 }
 
+void Brick::setDestroyed() {
+	isDestroyed = true;
+}
+
+void Brick::resetDestroyed()
+{
+	isDestroyed = false;
+}
+
 void Brick::CheckCollision(Ball& b) {
-	sf::Shape& tmpRect = getBrick();
-	if (b.getBall().getGlobalBounds().intersects(tmpRect.getGlobalBounds()) && b.getIsNotCollide()) {
-		float b_collision = tmpRect.getGlobalBounds().top + tmpRect.getGlobalBounds().height - b.getBall().getGlobalBounds().top; //Bottom 
-		float t_collision = b.getBall().getGlobalBounds().top + b.getBall().getGlobalBounds().height - tmpRect.getGlobalBounds().top; //Top
-		float l_collision = b.getBall().getGlobalBounds().left + b.getBall().getGlobalBounds().width - tmpRect.getGlobalBounds().left; //Left
-		float r_collision = tmpRect.getGlobalBounds().left + tmpRect.getGlobalBounds().width - b.getBall().getGlobalBounds().left; //Right
+	sf::FloatRect tmpRect = getBrick().getGlobalBounds();
+	sf::FloatRect BallRect = b.getBall().getGlobalBounds();
+	if (BallRect.intersects(tmpRect) && b.getIsNotCollide()) {
+		float b_collision = tmpRect.top + tmpRect.height - BallRect.top; //Bottom 
+		float t_collision = BallRect.top + BallRect.height - tmpRect.top; //Top
+		float l_collision = BallRect.left + BallRect.width - tmpRect.left; //Left
+		float r_collision = tmpRect.left + tmpRect.width - BallRect.left; //Right
 		if (t_collision <= b_collision && t_collision <= l_collision && t_collision <= r_collision || b_collision <= t_collision && b_collision <= l_collision && b_collision <= r_collision)
 		{
 			if (l_collision <= r_collision && l_collision <= t_collision && l_collision <= b_collision || r_collision <= l_collision && r_collision <= t_collision && r_collision <= b_collision)

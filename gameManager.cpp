@@ -4,6 +4,7 @@
 
 gameManager::gameManager(int nbLine)
 {
+	std::string ligne = "OXXXXXXXOXXXXXXXXXXXXXXX";
 	for (int i = 0; i < nbLine; i++) {
 		std::vector<Brick*> Line;
 		for (int j = 0; j < Global::nbBrick; j++) {
@@ -14,6 +15,22 @@ gameManager::gameManager(int nbLine)
 	for (int i = 0; i < nbLine; i++) {
 		for (int j = 0; j < Global::nbBrick; j++) {
 			AllBrick[i][j] = new Brick(Global::sizeYBrick * i, Global::sizeXBrick * j, rand() % 3 + 1);
+		}
+	}
+	int k = 0;
+	for (int i = 0; i < nbLine; i++) {
+		for (int j = 0; j < Global::nbBrick; j++) {
+			if (k <= ligne.length()) {
+				if (ligne[k] == 'O') {
+					AllBrick[i][j]->resetDestroyed();
+					k++;
+				}
+				else {
+					AllBrick[i][j]->setDestroyed();
+					k++;
+				}
+			}
+
 		}
 	}
 
@@ -33,8 +50,6 @@ Ball& gameManager::getBall(int i)
 {
 	return *AllBall[i];
 }
-
-
 
 PlatForm* gameManager::GetPlatForm(int i )
 {

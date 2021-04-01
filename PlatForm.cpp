@@ -1,5 +1,5 @@
-#include "PlatForm.h"
 #include "Global.h"
+#include "PlatForm.h"
 #include <iostream>
 
 PlatForm::PlatForm(float _CoeffPos)
@@ -8,38 +8,36 @@ PlatForm::PlatForm(float _CoeffPos)
 	f.setSize(sf::Vector2f(120, 40));
 	f.setOrigin(f.getSize().x * 0.5, f.getSize().y * 0.5);
 	f.setPosition(Global::ScreenX / 4 * CoeffPos, Global::ScreenY);
-	BoxCollision = f.getGlobalBounds(); 
+	BoxCollision = f.getGlobalBounds();
 }
 sf::RectangleShape& PlatForm::GetPlateform()
 {
 	return f;
 }
-void PlatForm::Collide(Ball* b, bool isNotCollide, sf::Vector2f BallDirection) 
+void PlatForm::Collide(Ball& b)
 {
-	
-		sf::RectangleShape tempRect = GetPlateform(); 
-		if (b->getBall().getGlobalBounds().intersects(tempRect.getGlobalBounds()) && isNotCollide) 
+	sf::Shape& tmpRect = GetPlateform();
+	if (b.getBall().getGlobalBounds().intersects(tmpRect.getGlobalBounds()) && b.getIsNotCollide()) {
+		float b_collision = tmpRect.getGlobalBounds().top + tmpRect.getGlobalBounds().height - b.getBall().getGlobalBounds().top; //Bottom 
+		float t_collision = b.getBall().getGlobalBounds().top + b.getBall().getGlobalBounds().height - tmpRect.getGlobalBounds().top; //Top
+		float l_collision = b.getBall().getGlobalBounds().left + b.getBall().getGlobalBounds().width - tmpRect.getGlobalBounds().left; //Left
+		float r_collision = tmpRect.getGlobalBounds().left + tmpRect.getGlobalBounds().width - b.getBall().getGlobalBounds().left; //Right
+		if (t_collision <= b_collision && t_collision <= l_collision && t_collision <= r_collision || b_collision <= t_collision && b_collision <= l_collision && b_collision <= r_collision)
 		{
-			float t_collision = b->getBall().getGlobalBounds().top + b->getBall().getGlobalBounds().height - tempRect.getGlobalBounds().top; 
-			float l_collision = b->getBall().getGlobalBounds().left + b->getBall().getGlobalBounds().width - tempRect.getGlobalBounds().left;
-			float r_collision = tempRect.getGlobalBounds().left + tempRect.getGlobalBounds().width - b->getBall().getGlobalBounds().left; 
-			if (t_collision <= l_collision && t_collision <= r_collision) 
+			if (l_collision <= r_collision && l_collision <= t_collision && l_collision <= b_collision || r_collision <= l_collision && r_collision <= t_collision && r_collision <= b_collision)
 			{
-				if (l_collision <= r_collision && l_collision <= t_collision || r_collision <= l_collision && r_collision <= t_collision) 
-				{
-					BallDirection.x *= -1; 
-				} 
-				BallDirection.y *= -1; 
+				b.direction.x *= -1;
 			}
-			if (l_collision <= r_collision && l_collision <= t_collision || r_collision <= l_collision && r_collision <= t_collision)
-			{
-				BallDirection.x *= -1;
-			}
-			isNotCollide = false; 
+			b.direction.y *= -1;
 		}
-		else 
+		if (l_collision <= r_collision && l_collision <= t_collision && l_collision <= b_collision || r_collision <= l_collision && r_collision <= t_collision && r_collision <= b_collision)
 		{
-			isNotCollide = true; 
+			b.direction.x *= -1;
 		}
+		b.Collide();
+	}
+	else {
+		b.StopCollide();
+	}
 }
 

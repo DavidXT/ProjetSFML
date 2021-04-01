@@ -26,11 +26,14 @@ void Ball::moveBall(float deltaTime,sf::Vector2f target) {
 void Ball::stopShoot()
 {
 	canShoot = false;
+	Global::_score -= 10;
+	Global::dispoBall--;
 }
 
 void Ball::reload()
 {
 	canShoot = true;
+	Global::dispoBall++;
 }
 
 bool Ball::getShoot()

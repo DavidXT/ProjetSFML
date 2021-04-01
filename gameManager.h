@@ -10,9 +10,9 @@ public:
 	Ball& getBall(int);
 	sf::Text getScore();
 	void setScore();
+	PlatForm* GetPlatForm(int);
 private:
 	Ball* AllBall[Global::nbBall];
-	PlatForm* GetPlatForm(int);
 	std::vector<std::vector<Brick*>> AllBrick;
 	std::vector<PlatForm*> Vec_Plat;
 private:

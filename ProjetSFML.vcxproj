@@ -25,8 +25,10 @@
     <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="MathFunctions.cpp" />
+    <ClCompile Include="PlatForm.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Viseur.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -36,7 +38,9 @@
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="MathFunctions.h" />
+    <ClInclude Include="PlatForm.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="Viseur.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
