@@ -50,36 +50,6 @@ UIManager::UIManager()
 	shoot.setVolume(10);
 	hit.setBuffer(hitbuffer); 
 	hit.setVolume(10);
-	
-	
-}
-int UIManager::MusicManager(gameManager* gm) 
-{
-	////if (!gm->checkWin() && Global::_score > 0) 
-	////{
-	////	if (!)
-	////		return -1; 
-	////	MainTheme.play();
-	////	MainTheme.setVolume(70);
-	////	//MainTheme.setLoop(true); 
-	////}
-	////else 
-	////{
-	////	MainTheme.stop(); 
-	////}
-	//if (gm->checkWin())
-	//{
-	//	WinTheme.play();
-	//	WinTheme.setVolume(50);
-	//}
-	//if (Global::_score < 0)
-	//{
-	//	if (!)
-	//		return -1;
-	//	GameOverTheme.play();
-	//	GameOverTheme.setVolume(50);
-	//}
-	return 1; 
 }
 
 
