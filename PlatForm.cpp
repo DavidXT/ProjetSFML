@@ -1,8 +1,7 @@
 #include "Global.h"
 #include "PlatForm.h"
 #include <iostream>
-
-/* Constructor */
+// Constructeur de la PlateForme
 PlatForm::PlatForm(float _CoeffPos)
 {
 	CoeffPos = _CoeffPos;
@@ -11,18 +10,18 @@ PlatForm::PlatForm(float _CoeffPos)
 	f.setPosition(Global::ScreenX / 4 * CoeffPos, Global::ScreenY);
 	BoxCollision = f.getGlobalBounds();
 }
-/* Return shape */
+// Fonction qui retourn la shape de la plateform
 sf::RectangleShape& PlatForm::GetPlateform()
 {
 	return f;
 }
-
-/* Check collision with a ball */
+// Fonction de collision entre la plateforme et la balle 
 void PlatForm::Collide(Ball& b) 
 {
-		sf::FloatRect BallRect = b.getBall().getGlobalBounds();
-		sf::FloatRect tempRect = GetPlateform().getGlobalBounds();
-		if (BallRect.intersects(tempRect) && b.getIsNotCollide())
+		// on récupère la plateforme
+		sf::Shape& tempRect = GetPlateform(); 
+		// si la balle touche un des trois côtés visibles de la plateforme, on la revoie 
+		if (b.getBall().getGlobalBounds().intersects(tempRect.getGlobalBounds()) && b.getIsNotCollide())
 		{
 			b.Collide();
 			float t_collision = BallRect.top + BallRect.height - tempRect.top;
@@ -40,9 +39,12 @@ void PlatForm::Collide(Ball& b)
 			{
 				b.direction.x *= -1;
 			}
+			// pour que la balle ne touche deux fois la plateforme
+			b.Collide();
 		}
 		else 
 		{
+			// pour que la balle puisse retoucher la plateforme
 			b.StopCollide();
 		}
 

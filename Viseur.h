@@ -7,6 +7,7 @@ class Viseur
 public : 
 	Viseur(sf::RenderWindow&);
 	void Project(sf::Vector2i, sf::Vector2f, sf::Vector2f, gameManager*);
+	void ProjectOnBrick(float, float, float, sf::FloatRect, sf::Vector2f); 
 	void draw(); 
 	sf::Vertex line[4];
 	sf::FloatRect boxCollision; 
@@ -15,6 +16,7 @@ private:
 	float pente; 
 	float origin; 
 	sf::RenderWindow& window; 
+	bool StopRay = false; 
  
 
 };
