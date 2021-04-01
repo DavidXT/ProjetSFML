@@ -19,7 +19,7 @@ gameManager::gameManager(int nbLine)
 	}
 	int k = 0;
 	for (int i = 0; i < nbLine; i++) {
-		for (int j = 0; j < Global::nbBrick; j++) {
+		for (int j = 0; j < Global::BrickColumnCount; j++) {
 			if (k <= ligne.length()) {
 				if (ligne[k] == 'O') {
 					AllBrick[i][j]->resetDestroyed();

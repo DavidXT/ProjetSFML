@@ -13,7 +13,7 @@ void main() {
 	srand(time(NULL)); 
 
 	/*Initialise Game manager and player*/
-	gameManager* gm = new gameManager(Global::level);
+	gameManager* gm = new gameManager(Global::BrickLineCount);
 	UIManager* UI = new UIManager();
 	Player* p = new Player(sf::Vector2f(40,70));
 
@@ -49,6 +49,7 @@ void main() {
 					}
 				}
 			}
+			oViseur->Project(oMousePositionForRotation, p->GetPlayerPosition(), directionRotation, gm);
 			for (int b = 0; b < Global::nbBall; b++) {
 				gm->getBall(b).CheckScreen(deltaTime, p);
 				oMousePositionForRotation = sf::Mouse::getPosition(window);
@@ -58,8 +59,8 @@ void main() {
 				gm->GetPlatForm(0)->Collide(gm->getBall(b));
 				gm->GetPlatForm(1)->Collide(gm->getBall(b));
 				/* Brick Collision */
-				for (int i = 0; i < Global::level; i++) {
-					for (int j = 0; j < Global::nbBrick; j++) {
+				for (int i = 0; i < Global::BrickLineCount; i++) {
+					for (int j = 0; j < Global::BrickColumnCount; j++) {
 						if (!gm->getBrick(i, j)->getDestroyed()) {
 							gm->getBrick(i, j)->CheckCollision(gm->getBall(b));
 							window.draw(gm->getBrick(i, j)->getBrick());
