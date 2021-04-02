@@ -9,19 +9,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{e095fb1f-a366-4e82-95d7-40aedd59945e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{2f94f3a2-10cc-4bdc-959b-678f45bf8c79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Global.cpp" />
-    <ClCompile Include="MathFunctions.cpp" />
-    <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="gameManager.cpp" />
-    <ClCompile Include="Viseur.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="PlatForm.cpp" />
-    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="gameManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatForm.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="MathFunctions.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Viseur.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">

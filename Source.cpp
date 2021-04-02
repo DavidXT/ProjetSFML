@@ -124,10 +124,7 @@ void main() {
 			{
 				UI->GameOverTheme.play();
 			}
-			UI->tScore.setString("Score : " + std::to_string(Global::_score));
-			UI->tScore.setPosition(Global::ScreenX / 2, Global::ScreenY / 2);
 			window.draw(UI->gameOver);
-			window.draw(UI->tScore);
 			window.display();
 		}
 	}
